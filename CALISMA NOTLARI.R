@@ -132,3 +132,124 @@ iris$Sepal.Length
        col=as.numeric(iris$Species),
        ylab="Sepal Length")
   legend('topleft', legend = levels(iris$Species), pch = 1:3)
+  
+  # Attempting to multiply two objects in different lengths:
+  vec1 <- c(1, 2, 3)
+  vec2 <- c(1, 2)
+  vec1 * vec2
+  ## Warning in vec1 * vec2: longer object length is not a multiple of shorter
+  ## object length
+  ## [1] 1 4 3
+ # Lets generate your own function with warning and error separately to see the difference between an error and
+ # a warning:
+    warn_test <- function(x){
+      if(x<=0){
+        warning("WATCH OUT! 'x' is less than or equal to 0. Set it to 1.")
+        x <- 1 }
+      return(2/x)
+    }
+  warn_test(0)
+  warn_test(10)
+  error_test <- function(x){
+    if(x<=0){
+      stop("'x' is less than or equal to 0... TERMINATE")
+    }
+    return(2/x)
+  }
+  error_test(0)
+  error_test(10)
+  
+  myfibrec <- function(n){
+    if(n<0){
+      warning("Assuming you meant 'n' to be positive -- doing that instead")
+      n <- n*-1
+    } else if(n==0){
+      stop("'n' is uninterpretable at 0")
+    }
+    if(n==1||n==2){
+      return(1)
+    } else {
+      return(myfibrec(n-1)+myfibrec(n-2))
+    } }
+  
+  myfibrec(0)
+  myfibrec(10)
+  myfibrec(-10)
+  
+ # But watch what happens when you pass that function call as the first argument to try:
+    try(myfibrec(0))
+  ## Error in myfibrec(0) : 'n' is uninterpretable at 0
+  try(myfibrec(0),silent=TRUE)
+  attempt1 <- try(myfibrec(0),silent=TRUE)
+  
+  #Meanwhile, if you pass a function to try and it doesn’t throw an error, then try has no effect, and you
+  #simply get the normal return value.
+  attempt2 <- try(myfibrec(6),silent=TRUE)
+  attempt2
+  
+  myfibrecvector <- function(nvec){
+    nterms <- length(nvec)
+    result <- rep(0,nterms)
+    for(i in 1:nterms){
+      result[i] <- myfibrec(nvec[i])
+    }
+    return(result)
+  }
+  
+  myfibrecvectorTRY <- function(nvec){
+    nterms <- length(nvec)
+    result <- rep(0,nterms)
+    for(i in 1:nterms){
+      attempt <- try(myfibrec(nvec[i]),silent=T)
+      if(class(attempt)=="try-error"){
+        result[i] <- NA
+      } else {
+        result[i] <- attempt
+      }
+    }
+    return(result)
+  }
+  baz <- myfibrecvectorTRY(nvec=c(3,2,7,0,9,13))
+  baz
+  
+  attempt4 <- suppressWarnings(myfibrec(-3))
+  attempt4
+  
+  
+  #You may make R pause for a specified amount of time, in seconds, before continuing:
+    Sys.sleep(3)
+ # When you run this code, R will pause for three seconds before you can continue using the console.
+ # Consider the following:
+    sleep_test <- function(n){
+      result <- 0
+      for(i in 1:n){
+        result <- result + 1
+        Sys.sleep(0.5)
+      }
+      return(result)
+    }
+  sleep_test(8)
+  
+  prog_test <- function(n){
+    result <- 0
+    progbar <- txtProgressBar(min=0,max=n,style=1,char="=")
+    for(i in 1:n){
+      result <- result + 1
+      Sys.sleep(0.5)
+      setTxtProgressBar(progbar,value=i)
+    }
+    close(progbar)
+    return(result)
+  }
+  prog_test(9)
+  
+  
+  #If you want to know how long a computation takes to complete, you can use the Sys.time command.
+  Sys.time()
+  ## [1] "2024-02-26 10:15:22 +03"
+  #Highlight all four lines and execute them in the console:
+    t1 <- Sys.time()
+  Sys.sleep(3)
+  t2 <- Sys.time()
+  t2-t1
+  ## Time difference of 3.007326 secs
