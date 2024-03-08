@@ -166,12 +166,16 @@ female$Sex <- "F"
 male$Sex <- "M"
 results <- bind_rows(female, male)
 results
-library(dplyr)
+
+# The easiest way to get dplyr is to install the whole tidyverse:
+install.packages("tidyverse")
+
+
 student <- read.csv("https://raw.githubusercontent.com/shriyaa01/Student-Result-Analysis/main/Expanded_data_with_more_features.csv", sep = ",")
 head(student)
 
-install.packages("dplyr")
-library(dplyr)
+library(magrittr)
+library(tidyverse)
 new_student <- student |> select(PracticeSport, MathScore, ReadingScore, IsFirstChild,  LunchType)
 new_student |> head(10)
 
@@ -181,3 +185,66 @@ sum(is.na(q4_c))
 
 #Check the Structure
 str(q4_c)
+
+q4 <- q4_c |> subset(MathScore > mean(ReadingScore)) |> select(-ReadingScore)
+head(q4)
+
+q5 <- new_student %>% subset(PracticeSport == "regularly" & LunchType == "standard")
+head(q5)
+
+q4_c |> 
+  select(MathScore, ReadingScore) %T>% plot(., main="Scatter Plot of Student Math Score vs Reading Score", col="dark red", pch=10) |> cor()
+
+student <- read.csv("https://raw.githubusercontent.com/shriyaa01/Student-Result-Analysis/main/Expanded_data_with_more_features.csv", sep = ",")
+
+top <- student %>% subset(MathScore > 85) %>% filter(PracticeSport == "regularly" & EthnicGroup == "group A" & IsFirstChild == "yes" & TransportMeans == "school_bus") %>% arrange(MathScore)
+tail(top)
+
+library(palmerpenguins)
+#data(package = 'palmerpenguins')
+head(penguins)
+
+penguins %>% aggregate(cbind(bill_length_mm, bill_depth_mm) ~ species, . , mean)
+
+penguins %>% 
+  subset(bill_length_mm > 40) %>% 
+  aggregate(cbind(bill_depth_mm, body_mass_g) ~ species, ., mean)
+
+penguins %$%
+  table(species)
+
+penguins %>% 
+  select(c(bill_length_mm,species)) %>% 
+  head(.,10)
+
+#you realize that all variables starts with "b". Use the starts_with functions. 
+penguins %>%
+  select(starts_with("b")) %>%
+  head(.,10)
+
+penguins %>% 
+  select_if(is.numeric) %>% 
+  head(., 10)
+
+penguins |> 
+  filter(between(body_mass_g, 4900, 5400), species=="Gentoo")
+
+penguins |> 
+  group_by(species) |>  na.omit() |> 
+  summarise(mean(bill_length_mm))
+
+#create new data
+new_penguins <- penguins %>% 
+  mutate(Proportion = bill_length_mm / bill_depth_mm) %>%  mutate(Type = ifelse(Proportion < 1.9, "A","B"))
+head(new_penguins)
+
+new_penguins %>% 
+  group_by(species) %>% 
+  filter(Type == "B") %>%
+  count()
+
+penguins %>%
+  select(bill_depth_mm, body_mass_g) %T>%
+  plot(., xlab = "Bill Depth", ylab = "Body Mass",main = "Relationship between Bill Depth and Body Mass ", col = factor(penguins$species), pch = 6)
+
+legend("topright", legend = levels(penguins$species), col = 1:length(levels(penguins$species)), pch = 6)
