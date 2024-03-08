@@ -57,3 +57,4 @@ save(var1, var2, var3,var4, file = "myvar.RData")
 load("myvar.RData")
 #lastly check the objects in the global environment.
 ls()
+
