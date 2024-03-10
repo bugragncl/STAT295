@@ -1,0 +1,282 @@
+Definitions - Advantages and Disadvantages
+What is Linux?
+
+Linux is a powerful and flexible family of operating systems that are free to use and share. Anyone uses the Linux can see the how system works since its source code is open for everyone to explore and modify. With the advantage of these, people from the all around the world can contribute to the system.
+
+Advantages:
+
+Linux is an open-source operating system. This indicates that anyone may readily obtain the source code and that anyone can contribute, alter, and share the code with others without obtaining permission.
+
+Compared to other operating systems, Linux offers superior security. Although Linux includes some malware, it is still less vulnerable than other operating systems, therefore it is not completely safe. Therefore, no antivirus software is needed.
+
+With Linux, software upgrades are frequent and simple.
+
+Disadvantages:
+
+It’s not very easy to use. Therefore, newcomers could find it complicated.
+
+Compared to Windows, it features smaller peripheral hardware drivers.
+
+Compared to other operating systems, professional technical help for Linux computers may be scarce, despite the operating system’s thriving community and plenty of online resources.
+
+Essential Commands
+Some essential Linux Commands:
+
+ls: List files and directories
+
+cd: Change directory
+
+mkdir: Create a new directory
+
+rm: Remove files or directories
+
+cp: Copy files and directories
+
+mv: Move or rename files and directories
+
+cat: Display file content
+
+Basic Commands:
+echo is a Unix/Linux command tool used for displaying lines of text or string which are passed as arguments on the command line. This is one of the basic command in linux and most commonly used in shell scripts.
+
+wget is a command line utility for downloading huge sizes files from the Internet.
+
+What makes Linux different from Unix?
+The primary distinction between Unix and Linux is that Unix-based proprietary operating systems are sold for a price, whereas Linux is free and open-source. The fact that Linux is a free operating system and that anyone can examine its source code is one of its best features. Linux may contain fewer infections and offer a greater variety of programming languages and user interfaces.
+
+
+Question 1: Meet Linux
+Complete the following questions respectively.
+
+i. Indicate the current date via Terminal.
+
+date
+
+ii. Indicate the calendar for June 2004.
+
+cal Jun 2004
+
+iii. Indicate the 10th month of the year 1 A.D.
+
+cal October 1
+
+iv. Indicate the current month or day.
+
+cal
+
+Question 2: Some Commands and File Operations
+Complete the following statements respectively.
+
+i. Show the following on the Terminal: “I want to learn Linux.”
+
+echo ‘I want to learn Linux’
+
+ii. Using some commands show on the Terminal:
+
+I wake up today.
+
+I come to the class.
+
+I started to learn Linux.
+
+I’ll go back home.
+
+echo -e ‘I wake up today.\nI come to the class.\nI started to learn Linux.\nI’\‘’ll go back to home.’
+
+iii. Assign 60 to x. Then, print out ‘The value of x is equal to 60.’
+
+x=60
+
+echo The value of x is $x
+
+iv. Assign 6*12 to Multiplication and print ‘Variable Multiplication equals to: (result)’.
+
+Multip=$((6*12)); echo Variable Multip equals to: $Multip
+
+v. Look at the working directory, then set up ‘Desktop’ as your working directory and list the files you have on your Desktop.
+
+pwd cd /Users/computername/Desktop
+
+for windows: cd C:Users/User/Desktop for windows ls
+
+vi. Create a folder called favorite, and create a film.txt file inside the folder.
+
+mkdir favorite
+
+touch favorite/film.txt
+
+vii. Fill with the favorite directors names. Then, remove the directory directors.
+
+echo “Here is my favorites directors:” > favorite/film.txt
+
+echo “first=‘Tarantino’” >> favorite/film.txt
+
+echo “second=‘Kubrick’” >> favorite/film.txt
+
+echo “third=‘Trier’” >> favorite/film.txt
+
+echo “fourth=‘Scorsese’” >> favorite/film.txt
+
+viii. Create a sub-directory by name musics under favorites. Then, remove directory of musics.
+
+mkdir favorite/music
+
+rmdir favorite/music
+
+iv. Create a new file called math in favorite and then create a number.txt file inside the math file.
+
+mkdir favorite/math
+
+touch favorite/math/numbers.txt
+
+v. Assign number1=6, number2=4, product=number1*number2 and sum=number1+number2 using declare command with -i option. Then, write the values of product and sum in numbers.txt file.
+
+Note: In bash, variables may have the integer attribute, and the only way to handle this is by declare command.
+
+declare -i number1=6 number2=2 product=number1*number2 sum=number1+number2
+
+echo “product=$product sum=$sum” > favorite/math/numbers.txt
+
+vi.Using cat command, print the values inside your numbers.txt file.
+
+cat favorite/math/numbers.txt
+
+vii. Copy everything inside numbers.txt file to a newly created txt file called new, and then delete numbers.txt file.
+
+cp favorite/math/numbers.txt favorite/math/new.txt
+
+rm favorite/math/numbers.txt
+
+viii. Change your working directory as math folder. Then, change it to as your Desktop.
+
+cd /Users/mehmeterkan/Desktop/favorite/math
+
+cd .. #back to favorite
+
+cd .. #back to desktop
+
+Question 3: Shortcuts in file operations
+i. Set desktop as a working directory.
+
+/Users/mehmeterkan/Desktop
+
+ii. Create a stat295.txt file on your desktop. Then, using the echo command, add three weeks’ topic names to this file.
+
+touch stat 295.txt
+
+echo ‘First Week: Revision’ > stat295.txt
+
+echo ‘Second Week: Github and dplyr’ >> stat295.txt
+
+echo ‘Third Week: Linux’ >> stat295.txt
+
+cat stat295.txt
+
+iii.  Create ‘METU_Class’ folder on your desktop. Create STAT folder into METU_Class and move stat295.txt file to STAT folder you created.
+
+mkdir METU_Class
+
+mkdir METU_Class/STAT
+
+mv stat295.txt METU_Class/STAT
+
+iv. Create a new folder named ‘MATH’ into METU_Class. Create ‘class.txt’ file into MATH folder. Then, create a list of the math class that you have taken so far.
+
+mkdir METU_Class/MATH
+
+cat > METU_Class/MATH/class.txt
+
+Class:
+
+1. MATH119
+
+2. MATH120
+
+3. MATH260
+
+4. MATH219
+
+Note: You can use Ctrl + d to close the bash shell. For mac use control + d
+
+v. Change your working directory as METU_Class. Create 4 txt files named ‘class_1.txt’, …, ‘class_4.txt’ into METU_Class folder.
+
+cd METU_Class
+
+touch class_{1..4}.txt
+
+vi. Move these 4 txt files to STAT folder.
+
+mv *.txt STAT
+
+vii. Write ‘This is the first class in STAT’, . . ., ‘This is the fourth class in STAT’ for each .txt file.
+
+#First, back to the STAT file.
+
+cd STAT
+
+echo This is the first class in STAT > class_1.txt
+
+echo This is the second class in STAT > class_2.txt
+
+echo This is the third class in STAT > class_3.txt
+
+echo This is the fourth class in STAT > class_4.txt
+
+viii. Use the cat command and indicate all class.txt files.
+
+cat class_*
+
+Question 4: Reading Data via Linux
+Traffic Density
+
+i. Create a new directory on your desktop called dataset and set this directory as working directory.
+
+#First back to the Desktop.
+
+cd /Users/mehmeterkan/Desktop
+
+C:Users/User/Desktop #for windows
+
+mkdir dataset
+
+cd dataset
+
+ii. Download the data about the IBB hourly trafic dataset. Here is the main data. For the question, we use Januaregy 2024 Traffic Density Data. After downloading use ‘wc’ command show the line, word and bytes.
+
+wget https://data.ibb.gov.tr/dataset/3ee6d744-5da2-40c8-9cd6-0e3e41f1928f/resource/7d9cbf11-f4b8-464d-bb3a-642b79e8b32b/download/traffic_density__202401.csv
+
+Note: If you do not have wget package, you can install by using: brew install wget
+
+iii. Change the file name with ‘traffic’.
+
+mv traffic_density__202401.csv traffic.csv
+
+iv. Indicate the first 10 rows of the data.
+
+head traffic.csv
+
+v. Indicate the last 20 rows of the data.
+
+tail -n20 traffic.csv
+
+vi. Combine first 10 rows and last 20 rows in new_traffic.csv file.
+
+head -n10 traffic.csv > new_traffic.csv
+
+tail -n20 traffic.csv >> new_traffic.csv
+
+cat new_traffic.csv
+
+vii. Find the maximum 10 speed from the dataset.
+
+awk -F ‘,’ ‘{print $6}’ traffic.csv | sort -nr | head -n 10
+
+
+Flights (Bonus)
+Remember the flights data set from the lecture. Here is the link of 2008.csv.bz2. Download file, unzipped and find the maximum 50 arrival delays in the data set. Create a new file with these values.
+
+wget —content-disposition https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/EIR0RA
+
+bzip2 -d 2008.csv.bz2
+
+awk -F ‘,’ ‘{print $15}’ 2008.csv | sort -nr | head -n 50 >> top50_arr_delay.csv
